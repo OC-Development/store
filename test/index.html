@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block bodyClass %}page-index page-index-v3{% endblock %}
+
+{% block content %}
+
+<div class="home container">
+
+  {# ================================
+     Top row: Description + Sidebar
+     ================================ #}
+  <section class="home-header {% if config('home-sidebar') == 'On' %}has-sidebar{% endif %}">
+    <main class="store-text text-content intro-card">
+      {{ index.description|raw }}
+    </main>
+
+    {% if config('home-sidebar') == 'On' %}
+      {% include "sidebar.twig" %}
+    {% endif %}
+  </section>
+
+  {# ================================
+     Categories grid
+     ================================ #}
+  {% if config('home-categories') == 'On' and store.categories|length %}
+    <section class="home-categories">
+      <h2 class="section-title">Categories</h2>
+
+      <div class="site-home-categories">
+        {% for category in store.categories %}
+          <a
+            class="category"
+            href="/category/{{ category.slug ? category.slug : category.id }}"
+          >
+            <img src="{{ category.image }}" alt="{{ category.name }}" />
+            {{ category.name }}
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+</div>
+
+{% endblock %}
