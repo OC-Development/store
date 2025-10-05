@@ -33,7 +33,7 @@
             href="/category/{{ category.slug ? category.slug : category.id }}"
           >
             <img src="{{ category.image }}" alt="{{ category.name }}" />
-            {{ category.name }}
+            <span>{{ category.name }}</span>
           </a>
         {% endfor %}
       </div>
